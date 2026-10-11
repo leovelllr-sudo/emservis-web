@@ -11,7 +11,7 @@
     
     <style>
         :root {
-            --primary: #0066B2;          /* Azul exacto del logo EM */
+            --primary: #0066B2;         /* Azul exacto del logo EM */
             --primary-dark: #004c85;
             --secondary: #0a0a0a;         /* Negro profundo */
             --light-bg: #f4f6f9;
@@ -114,11 +114,6 @@
             gap: 15px;
             cursor: pointer;
             text-decoration: none;
-        }
-
-        .logo-svg {
-            height: 52px;
-            width: auto;
         }
 
         .logo-text {
@@ -483,38 +478,6 @@
             font-size: 0.95rem;
         }
 
-        .admin-dashboard {
-            background: white;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            padding: 25px;
-        }
-
-        .admin-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .metric-card {
-            background: var(--light-bg);
-            padding: 15px;
-            border-radius: var(--radius);
-            border-left: 4px solid var(--primary);
-        }
-
-        .metric-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--secondary);
-        }
-
-        .metric-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
         footer {
             background: var(--secondary);
             color: white;
@@ -579,20 +542,6 @@
         <div class="navbar">
             <a class="logo-container" onclick="showView('home')">
                 <img src="logo.png" alt="EMServis Logo" style="height: 52px; width: auto; object-fit: contain;">
-                <svg class="logo-svg" viewBox="0 0 350 250" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Arco de Engranaje Negro exacto -->
-                    <path d="M 95 125 A 65 65 0 0 1 228 100" fill="none" stroke="#0a0a0a" stroke-width="16" stroke-linecap="butt"/>
-                    <rect x="80" y="115" width="16" height="12" fill="#0a0a0a" transform="rotate(-18 80 115)"/>
-                    <rect x="106" y="58" width="16" height="12" fill="#0a0a0a" transform="rotate(-55 106 58)"/>
-                    <rect x="156" y="38" width="16" height="12" fill="#0a0a0a" transform="rotate(8 156 38)"/>
-                    <!-- Letra E en Azul Corporativo #0066B2 -->
-                    <path d="M 115 88 L 170 88 L 170 102 L 132 102 L 132 114 L 165 114 L 165 128 L 132 128 L 132 142 L 172 142 L 172 156 L 115 156 Z" fill="#0066B2"/>
-                    <!-- Letra M en Azul Corporativo #0066B2 -->
-                    <path d="M 174 88 L 195 88 L 216 130 L 237 88 L 258 88 L 258 156 L 243 156 L 243 110 L 222 156 L 210 156 L 189 110 L 189 156 L 174 156 Z" fill="#0066B2"/>
-                    <!-- Texto SERVICES en tipografía exacta limpia -->
-                    <text x="118" y="188" font-family="'Montserrat', sans-serif" font-weight="700" font-size="29" fill="#0a0a0a" letter-spacing="3.5">SERVICES</text>
-                </svg>
-
                 <div class="logo-text">
                     <span class="logo-title">EMServis</span>
                     <span class="logo-subtitle">ESTERLIN MULTI SERVICIOS</span>
@@ -619,7 +568,6 @@
 
         <!-- VIEW: INICIO (HOME) -->
         <section id="view-home" class="view-section active">
-            <!-- HERO CON FONDO OSCURO DE CUARTO DE MÁQUINAS -->
             <div class="hero">
                 <div class="hero-text">
                     <h1>Soluciones Industriales & Suministros Técnicos</h1>
@@ -747,43 +695,6 @@
             </div>
         </section>
 
-        <!-- VIEW: PANEL DE ADMINISTRACIÓN SIMULADO -->
-            <div class="admin-dashboard">
-                <h2 style="margin-bottom: 20px; font-family: var(--font-brand);">Panel de Administración — EMServis</h2>
-                
-                <div class="admin-metrics">
-                    <div class="metric-card">
-                        <div class="metric-value">12</div>
-                        <div class="metric-label">Productos Registrados</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">RD$ 48,500</div>
-                        <div class="metric-label">Cotizaciones registradas hoy</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">3</div>
-                        <div class="metric-label">Pedidos Pendientes</div>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom: 12px;">Inventario Activo</h3>
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>SKU</th>
-                            <th>Producto</th>
-                            <th>Precio Unitario</th>
-                            <th>Existencia</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-inventory-table">
-                        <!-- Llenado dinámico -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
     </main>
 
     <!-- MODAL CARRITO -->
@@ -832,80 +743,77 @@
         </div>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT INTEGRADA -->
+    <!-- SCRIPT DE FUNCIONAMIENTO Y WHATSAPP -->
     <script>
+        // Base de datos local de productos de ejemplo
         const products = [
-            { id: 1, sku: 'EMS-EL-001', name: 'Breaker Industrial 3P 100A', category: 'Electricidad', price: 3450.00, stock: 15, badge: 'Destacado' },
-            { id: 2, sku: 'EMS-HT-002', name: 'Juego de Llaves Combinadas 12Pzas', category: 'Herramientas', price: 2200.00, stock: 8, badge: 'Oferta' },
-            { id: 3, sku: 'EMS-RP-003', name: 'Motor Eléctrico Trifásico 5HP', category: 'Repuestos', price: 18500.00, stock: 4, badge: 'Bajo Pedido' },
-            { id: 4, sku: 'EMS-EL-004', name: 'Cable Monopolar #10 AWG (Rollo)', category: 'Electricidad', price: 4100.00, stock: 20, badge: 'Destacado' },
-            { id: 5, sku: 'EMS-HT-005', name: 'Multímetro Digital Profesional', category: 'Herramientas', price: 2900.00, stock: 12, badge: 'Nuevo' },
-            { id: 6, sku: 'EMS-RP-006', name: 'Bomba Centrífuga 1.5HP', category: 'Repuestos', price: 9200.00, stock: 6, badge: 'Popular' }
+            { id: 1, code: "EMS-EL-001", name: "Breaker Industrial 3P 100A", category: "Electricidad", price: 3450, badge: "Destacado", image: "", description: "Protección termomagnética para tableros eléctricos principales.", available: true },
+            { id: 2, code: "EMS-HT-002", name: "Juego de Llaves Combinadas 12Pzas", category: "Herramientas", price: 2200, badge: "Nuevo", image: "", description: "Acero al cromo vanadio para trabajo pesado en taller.", available: true },
+            { id: 3, code: "EMS-RP-003", name: "Motor Eléctrico Trifásico 5HP", category: "Repuestos", price: 18500, badge: "Disponible", image: "", description: "Alta eficiencia 1750 RPM carcasa de hierro fundido.", available: true },
+            { id: 4, code: "EMS-EL-004", name: "Cable Monopolar #10 AWG (Rollo)", category: "Electricidad", price: 4100, badge: "Oferta", image: "", description: "Conductor de cobre antiflama THHN/THWN-2.", available: true },
+            { id: 5, code: "EMS-HT-005", name: "Multímetro Digital Profesional", category: "Herramientas", price: 2900, badge: "Precisión", image: "", description: "Medición de voltaje AC/DC, corriente y resistencia con pantalla iluminada.", available: true },
+            { id: 6, code: "EMS-RP-006", name: "Bomba Centrífuga 1.5HP", category: "Repuestos", price: 9200, badge: "Industrial", image: "", description: "Impulsor de bronce y succión reforzada para sistemas hidroneumáticos.", available: true }
         ];
 
         let cart = [];
 
         function showView(viewId) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
-            
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById('view-' + viewId).classList.add('active');
-            const activeNav = document.getElementById('nav-' + viewId);
-            if(activeNav) activeNav.classList.add('active');
-            window.scrollTo(0,0);
+            
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const navElem = document.getElementById('nav-' + viewId);
+            if(navElem) navElem.classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function renderProducts() {
             const featuredContainer = document.getElementById('featured-products');
             const catalogContainer = document.getElementById('catalog-products');
             
-            featuredContainer.innerHTML = '';
-            catalogContainer.innerHTML = '';
+            if(featuredContainer) featuredContainer.innerHTML = '';
+            if(catalogContainer) catalogContainer.innerHTML = '';
 
             products.forEach(p => {
-                const cardHTML = `
+                const cardHtml = `
                     <div class="product-card">
                         <div class="product-img">
                             <span class="product-badge">${p.badge}</span>
-                            [ ${p.name} ]
+                            <span>${p.name}</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-sku">SKU: ${p.sku}</div>
+                            <div class="product-sku">SKU: ${p.code}</div>
                             <div class="product-title">${p.name}</div>
-                            <div class="product-price">RD$ ${p.price.toLocaleString('es-DO', {minimumFractionDigits: 2})}</div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">${p.description}</p>
+                            <div class="product-price">RD$ ${p.price.toLocaleString('es-DO')}</div>
                             <button class="btn-add-cart" onclick="addToCart(${p.id})">
                                 🛒 Agregar al Carrito
                             </button>
                         </div>
                     </div>
                 `;
-
-                catalogContainer.innerHTML += cardHTML;
-                if(p.badge === 'Destacado') {
-                    featuredContainer.innerHTML += cardHTML;
-                }
+                if(featuredContainer && p.badge === "Destacado") featuredContainer.innerHTML += cardHtml;
+                if(catalogContainer) catalogContainer.innerHTML += cardHtml;
             });
-
-            renderAdminTable();
         }
 
         function filterProducts() {
             const query = document.getElementById('search-input').value.toLowerCase();
             const selectedCats = Array.from(document.querySelectorAll('.cat-filter:checked')).map(cb => cb.value);
             const stockFilter = document.querySelector('input[name="stock"]:checked').value;
-
-            const filtered = products.filter(p => {
-                const matchesSearch = p.name.toLowerCase().includes(query) || p.sku.toLowerCase().includes(query);
-                const matchesCat = selectedCats.length === 0 || selectedCats.includes(p.category);
-                const matchesStock = stockFilter === 'all' || (stockFilter === 'available' && p.stock > 0);
-                return matchesSearch && matchesCat && matchesStock;
-            });
-
+            
             const catalogContainer = document.getElementById('catalog-products');
             catalogContainer.innerHTML = '';
-            
+
+            const filtered = products.filter(p => {
+                const matchesText = p.name.toLowerCase().includes(query) || p.code.toLowerCase().includes(query);
+                const matchesCat = selectedCats.length === 0 || selectedCats.includes(p.category);
+                const matchesStock = stockFilter === 'all' || (stockFilter === 'available' && p.available);
+                return matchesText && matchesCat && matchesStock;
+            });
+
             if(filtered.length === 0) {
-                catalogContainer.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted);">No se encontraron productos coincidentes.</p>';
+                catalogContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">No se encontraron productos con esos filtros.</p>`;
                 return;
             }
 
@@ -914,12 +822,13 @@
                     <div class="product-card">
                         <div class="product-img">
                             <span class="product-badge">${p.badge}</span>
-                            [ ${p.name} ]
+                            <span>${p.name}</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-sku">SKU: ${p.sku}</div>
+                            <div class="product-sku">SKU: ${p.code}</div>
                             <div class="product-title">${p.name}</div>
-                            <div class="product-price">RD$ ${p.price.toLocaleString('es-DO', {minimumFractionDigits: 2})}</div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">${p.description}</p>
+                            <div class="product-price">RD$ ${p.price.toLocaleString('es-DO')}</div>
                             <button class="btn-add-cart" onclick="addToCart(${p.id})">
                                 🛒 Agregar al Carrito
                             </button>
@@ -929,98 +838,103 @@
             });
         }
 
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
             if(existing) {
                 existing.quantity++;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                cart.push({...product, quantity: 1});
             }
-
-            updateCartUI();
-            alert(`"${product.name}" ha sido agregado al carrito.`);
+            updateCart();
+            alert(`¡Agregado al carrito: ${product.name}!`);
         }
 
-        function updateCartUI() {
-            const cartCount = document.getElementById('cart-count');
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
+        function updateCart() {
+            const countElem = document.getElementById('cart-count');
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countElem.innerText = totalCount;
 
-            const cartContainer = document.getElementById('cart-items-container');
-            const totalValContainer = document.getElementById('cart-total-val');
+            const container = document.getElementById('cart-items-container');
+            const totalValElem = document.getElementById('cart-total-val');
 
             if(cart.length === 0) {
-                cartContainer.innerHTML = '<p style="text-align:center; color: var(--text-muted); padding:20px;">El carrito de compras está vacío.</p>';
-                totalValContainer.textContent = 'RD$ 0.00';
+                container.innerHTML = `<p style="color: var(--text-muted); text-align: center; padding: 20px;">Tu carrito está vacío.</p>`;
+                totalValElem.innerText = "RD$ 0.00";
                 return;
             }
 
-            let html = '<table class="cart-table"><thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Total</th></tr></thead><tbody>';
-            let grandTotal = 0;
+            let html = `<table class="cart-table"><thead><tr><th>Producto</th><th>Cant.</th><th>Subtotal</th></tr></thead><tbody>`;
+            let total = 0;
 
             cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                grandTotal += itemTotal;
-                html += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>${item.quantity}</td>
-                        <td>RD$ ${item.price.toLocaleString('es-DO')}</td>
-                        <td>RD$ ${itemTotal.toLocaleString('es-DO')}</td>
-                    </tr>
-                `;
+                const sub = item.price * item.quantity;
+                total += sub;
+                html += `<tr><td>${item.name}</td><td>${item.quantity}</td><td>RD$ ${sub.toLocaleString('es-DO')}</td></tr>`;
             });
 
-            html += '</tbody></table>';
-            cartContainer.innerHTML = html;
-            totalValContainer.textContent = `RD$ ${grandTotal.toLocaleString('es-DO', {minimumFractionDigits: 2})}`;
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+            totalValElem.innerText = `RD$ ${total.toLocaleString('es-DO')}`;
         }
 
         function openCartModal() {
-            updateCartUI();
             document.getElementById('cart-modal').style.display = 'flex';
+            updateCart();
         }
 
         function closeCartModal() {
             document.getElementById('cart-modal').style.display = 'none';
         }
 
+        // FUNCIÓN CLAVE: ENVÍO AUTOMÁTICO A WHATSAPP BUSINESS CON TICKET Y NÚMERO DE ORDEN
         function processCheckout() {
-            if(cart.length === 0) {
-                alert('El carrito está vacío.');
+            if (cart.length === 0) {
+                alert("El carrito está vacío.");
                 return;
             }
-            alert('¡Orden registrada exitosamente para EMServis! Se enviará confirmación a emservis.do@hotmail.com');
+
+            const orderNum = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+            let orderDetails = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                orderDetails += `• ${item.quantity}x ${item.name} (${item.code}) - RD$ ${itemTotal.toLocaleString('es-DO')}\n`;
+            });
+
+            const formattedTotal = total.toLocaleString('es-DO');
+
+            const whatsappMessage = 
+`*¡NUEVA SOLICITUD DE COMPRA — EMServis!* 🛠️
+*Número de Orden:* #${orderNum}
+
+*Detalle del Pedido:*
+${orderDetails}
+*Total Estimado:* RD$ ${formattedTotal}
+
+_Hola, me gustaría confirmar la disponibilidad y los pasos para el pago/entrega de esta orden._`;
+
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const phoneNumber = "18498694360"; // WhatsApp Business EMServis
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
             cart = [];
-            updateCartUI();
+            updateCart();
             closeCartModal();
+
+            window.open(whatsappURL, '_blank');
         }
 
         function handleQuoteSubmit(e) {
             e.preventDefault();
-            alert('Solicitud enviada correctamente a emservis.do@hotmail.com. Nos comunicaremos al +1 (849) 869-4360.');
+            alert("¡Solicitud de cotización enviada con éxito! Nos pondremos en contacto con usted a la brevedad.");
             e.target.reset();
         }
 
-        function renderAdminTable() {
-            const adminBody = document.getElementById('admin-inventory-table');
-            adminBody.innerHTML = '';
-            products.forEach(p => {
-                adminBody.innerHTML += `
-                    <tr>
-                        <td>${p.sku}</td>
-                        <td>${p.name}</td>
-                        <td>RD$ ${p.price.toLocaleString('es-DO')}</td>
-                        <td>${p.stock} unid.</td>
-                        <td><span style="color: green; font-weight: 700;">Disponible</span></td>
-                    </tr>
-                `;
-            });
-        }
-
-        window.onload = () => {
+        // Inicializar render de productos al cargar
+        window.onload = function() {
             renderProducts();
         };
     </script>
