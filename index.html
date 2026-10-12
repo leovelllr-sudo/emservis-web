@@ -514,14 +514,30 @@
             .hero-text h1 {
                 font-size: 1.9rem;
             }
-            .nav-links {
-                display: none;
+            /* --- PEGA ESTO AQUÍ DENTRO --- */
+            .menu-toggle {
+                display: block !important;
             }
+            .nav-links {
+                position: fixed !important;
+                top: 0;
+                left: -100%;
+                width: 260px;
+                height: 100vh;
+                background: white;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding: 70px 20px 20px 20px !important;
+                box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+                transition: left 0.3s ease-in-out;
+                z-index: 9999;
+            }
+            .nav-links.active {
+                left: 0 !important;
+            }
+            /* ---------------------------- */
         }
-    </style>
-</head>
-<body>
-
+        
     <!-- TOP BAR DE CONTACTO -->
     <div class="top-bar">
         <div class="top-bar-contact">
@@ -547,7 +563,11 @@
                     <span class="logo-subtitle">ESTERLIN MULTI SERVICIOS</span>
                 </div>
             </a>
-
+<!-- BOTÓN HAMBURGUESA MÓVIL -->
+            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú" style="display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); padding: 5px;">
+                ☰
+            </button>
+            
             <ul class="nav-links">
                 <li><a onclick="showView('home')" id="nav-home" class="active">Inicio</a></li>
                 <li><a onclick="showView('catalog')" id="nav-catalog">Catálogo</a></li>
@@ -1149,3 +1169,21 @@ _Hola, me gustaría confirmar la disponibilidad y los pasos para el pago/entrega
     </script>
 </body>
 </html>
+
+            <script>
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-links');
+            if (navMenu) {
+                navMenu.classList.toggle('active');
+            }
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.querySelector('.nav-links');
+                if (navMenu) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
