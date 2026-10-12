@@ -474,6 +474,21 @@
             .nav-links.active {
                 left: 0 !important;
             }
+            @media (max-width: 768px) {
+    /* ... tus reglas anteriores para la navegación móvil ... */
+
+    /* Oculta el texto "Carrito" en celulares */
+    .cart-btn-text {
+        display: none !important;
+    }
+
+    /* Reduce el padding y tamaño del botón para que ocupe menos de la mitad del espacio */
+    .cart-icon-btn {
+        padding: 8px 12px !important;
+        font-size: 1.1rem !important;
+        gap: 4px !important;
+    }
+}
         }
     </style>
 </head>
@@ -518,9 +533,9 @@
                 <li><a onclick="showView('contact')" id="nav-contact">Contacto</a></li>
             </ul>
 
-            <button class="cart-icon-btn" onclick="openCartModal()">
-                🛒 Carrito <span class="cart-badge" id="cart-count">0</span>
-            </button>
+           <button class="cart-icon-btn" onclick="openCartModal()">
+    🛒 <span class="cart-btn-text">Carrito</span> <span class="cart-badge" id="cart-count">0</span>
+</button>
         </div>
     </header>
 
