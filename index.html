@@ -514,7 +514,7 @@
             .hero-text h1 {
                 font-size: 1.9rem;
             }
-            /* --- PEGA ESTO AQUÍ DENTRO --- */
+            /* Agrega solo estas líneas aquí: */
             .menu-toggle {
                 display: block !important;
             }
@@ -535,7 +535,6 @@
             .nav-links.active {
                 left: 0 !important;
             }
-            /* ---------------------------- */
         }
         
     <!-- TOP BAR DE CONTACTO -->
@@ -563,11 +562,10 @@
                     <span class="logo-subtitle">ESTERLIN MULTI SERVICIOS</span>
                 </div>
             </a>
-<!-- BOTÓN HAMBURGUESA MÓVIL -->
-            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú" style="display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); padding: 5px;">
+<button class="menu-toggle" onclick="toggleMobileMenu()" style="display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); padding: 5px;">
                 ☰
             </button>
-            
+
             <ul class="nav-links">
                 <li><a onclick="showView('home')" id="nav-home" class="active">Inicio</a></li>
                 <li><a onclick="showView('catalog')" id="nav-catalog">Catálogo</a></li>
@@ -1176,6 +1174,15 @@ _Hola, me gustaría confirmar la disponibilidad y los pasos para el pago/entrega
                 navMenu.classList.toggle('active');
             }
         }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.querySelector('.nav-links');
+                if (navMenu) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
