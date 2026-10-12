@@ -927,10 +927,29 @@ _Hola, me gustaría confirmar la disponibilidad y los pasos para el pago/entrega
             window.open(whatsappURL, '_blank');
         }
 
-        function handleQuoteSubmit(e) {
-            e.preventDefault();
-            alert("¡Solicitud de cotización enviada con éxito! Nos pondremos en contacto con usted a la brevedad.");
-            e.target.reset();
+        function handleQuoteSubmit(event) {
+            event.preventDefault();
+
+            const inputs = event.target.querySelectorAll('.form-control');
+            const clientName = inputs[0].value.trim();
+            const clientEmail = inputs[1].value.trim();
+            const clientPhone = inputs[2].value.trim();
+            const projectDetails = inputs[3].value.trim();
+
+            const quoteId = '#COT-' + Math.floor(1000 + Math.random() * 9000);
+
+            let message = `📋 *SOLICITUD DE COTIZACIÓN ESPECIAL* 📋\n`;
+            message += `🔖 *Ticket:* ${quoteId}\n\n`;
+            message += `👤 *Cliente / Empresa:* ${clientName}\n`;
+            message += `✉️ *Correo:* ${clientEmail}\n`;
+            message += `📞 *Teléfono:* ${clientPhone}\n\n`;
+            message += `🛠️ *Detalles del Requerimiento:*\n${projectDetails}\n\n`;
+            message += `_Enviado desde el portal web oficial emservis.com_`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/18498694360?text=${encodedMessage}`, '_blank');
+            
+            event.target.reset();
         }
 
         // Inicializar render de productos al cargar
