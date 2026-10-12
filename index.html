@@ -779,10 +779,14 @@
             if(featuredContainer) featuredContainer.innerHTML = '';
             if(catalogContainer) catalogContainer.innerHTML = '';
 
-            products.forEach(p => {
-               const cardHtml = `
+            // 1. OBTENER LOS ÚLTIMOS 9 PRODUCTOS (invirtiendo el array para que los más nuevos salgan primero)
+            const latestProducts = [...products].reverse().slice(0, 9);
+
+            // Renderizar en Productos Destacados (Los últimos 9)
+            latestProducts.forEach(p => {
+                const cardHtml = `
                     <div class="product-card">
-                        <div class="product-img" style="background-image: url('${p.image}'); background-size: cover; background-position: center;">
+                        <div class="product-img" style="${p.image ? `background-image: url('${p.image}'); background-size: cover; background-position: center;` : ''}">
                             <span class="product-badge">${p.badge}</span>
                             ${!p.image ? `<span>${p.name}</span>` : ''}
                         </div>
@@ -797,8 +801,29 @@
                         </div>
                     </div>
                 `;
-                if(featuredContainer && p.badge === "Destacado") featuredContainer.innerHTML += cardHtml;
-                if(catalogContainer) catalogContainer.innerHTML += cardHtml;
+                if(featuredContainer) featuredContainer.innerHTML += cardHtml;
+            });
+
+            // Renderizar en el Catálogo Completo
+            products.forEach(p => {
+                const catalogHtml = `
+                    <div class="product-card">
+                        <div class="product-img" style="${p.image ? `background-image: url('${p.image}'); background-size: cover; background-position: center;` : ''}">
+                            <span class="product-badge">${p.badge}</span>
+                            ${!p.image ? `<span>${p.name}</span>` : ''}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-sku">SKU: ${p.code}</div>
+                            <div class="product-title">${p.name}</div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">${p.description}</p>
+                            <div class="product-price">RD$ ${p.price.toLocaleString('es-DO')}</div>
+                            <button class="btn-add-cart" onclick="addToCart(${p.id})">
+                                🛒 Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                if(catalogContainer) catalogContainer.innerHTML += catalogHtml;
             });
         }
 
