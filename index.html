@@ -780,11 +780,11 @@
             if(catalogContainer) catalogContainer.innerHTML = '';
 
             products.forEach(p => {
-                const cardHtml = `
+               const cardHtml = `
                     <div class="product-card">
-                        <div class="product-img">
+                        <div class="product-img" style="background-image: url('${p.image}'); background-size: cover; background-position: center;">
                             <span class="product-badge">${p.badge}</span>
-                            <span>${p.name}</span>
+                            ${!p.image ? `<span>${p.name}</span>` : ''}
                         </div>
                         <div class="product-info">
                             <div class="product-sku">SKU: ${p.code}</div>
